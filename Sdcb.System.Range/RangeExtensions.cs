@@ -3,13 +3,13 @@
     public static class RangeExtensions
     {
         public static int get_IndexerExtension(this int[] array, Index index) =>
-            index.FromEnd ? array[array.Length - index.Value] : array[index.Value];
+            index.IsFromEnd ? array[array.Length - index.Value] : array[index.Value];
 
         public static int get_IndexerExtension(this Span<int> span, Index index) =>
-            index.FromEnd ? span[span.Length - index.Value] : span[index.Value];
+            index.IsFromEnd ? span[span.Length - index.Value] : span[index.Value];
 
         public static char get_IndexerExtension(this string s, Index index) =>
-            index.FromEnd ? s[s.Length - index.Value] : s[index.Value];
+            index.IsFromEnd ? s[s.Length - index.Value] : s[index.Value];
 
         public static Span<int> get_IndexerExtension(this int[] array, Range range) =>
             array.Slice(range);
@@ -37,8 +37,8 @@
 
         private static (int start, int length) GetStartAndLength(Range range, int entityLength)
         {
-            var start = range.Start.FromEnd ? entityLength - range.Start.Value : range.Start.Value;
-            var end = range.End.FromEnd ? entityLength - range.End.Value : range.End.Value;
+            var start = range.Start.IsFromEnd ? entityLength - range.Start.Value : range.Start.Value;
+            var end = range.End.IsFromEnd ? entityLength - range.End.Value : range.End.Value;
             var length = end - start;
 
             return (start, length);

@@ -2,17 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Authors>sdcb</Authors>
+    <LangVersion>preview</LangVersion>
+    <Authors>sdcb, myblindy</Authors>
     <Description>Provide System.Index, System.Range for C# 8.0.</Description>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
     <PackageTags>Index, Range, C#8</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
-    <PackageProjectUrl>https://github.com/sdcb/Sdcb.System.Range/blob/master/Sdcb.System.Range/Range.cs</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/sdcb/Sdcb.System.Range/blob/master/Sdcb.System.Range/Range.cs</RepositoryUrl>
+    <Version>1.1.1</Version>
+    <PackageProjectUrl>https://github.com/myblindy/Sdcb.System.Range/blob/master/Sdcb.System.Range/Range.cs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/myblindy/Sdcb.System.Range/blob/master/Sdcb.System.Range/Range.cs</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageId>MB.System.Range</PackageId>
+    <Company></Company>
+    <Product>MB.System.Range</Product>
+    <AssemblyName>MB.System.Range</AssemblyName>
+    <RootNamespace>MB.System.Range</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

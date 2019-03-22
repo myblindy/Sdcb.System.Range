@@ -1,11 +1,13 @@
-﻿namespace System
+﻿using System.Runtime.CompilerServices;
+
+namespace System
 {
     public readonly struct Range : IEquatable<Range>
     {
         public Index Start { get; }
         public Index End { get; }
 
-        private Range(Index start, Index end)
+        public Range(Index start, Index end)
         {
             Start = start;
             End = end;
@@ -34,10 +36,53 @@
             return Start + ".." + End;
         }
 
-        public static Range Create(Index start, Index end) => new Range(start, end);
-        public static Range FromStart(Index start) => new Range(start, new Index(0, fromEnd: true));
-        public static Range ToEnd(Index end) => new Range(new Index(0, fromEnd: false), end);
-        public static Range All() => new Range(new Index(0, fromEnd: false), new Index(0, fromEnd: true));
+        public static Range StartAt(Index start) => new Range(start, Index.End);
+
+        public static Range EndAt(Index end) => new Range(Index.Start, end);
+
+        public static Range All => new Range(Index.Start, Index.End);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public OffsetAndLength GetOffsetAndLength(int length)
+        {
+            int start;
+            Index startIndex = Start;
+            if (startIndex.IsFromEnd)
+                start = length - startIndex.Value;
+            else
+                start = startIndex.Value;
+
+            int end;
+            Index endIndex = End;
+            if (endIndex.IsFromEnd)
+                end = length - endIndex.Value;
+            else
+                end = endIndex.Value;
+
+            if ((uint)end > (uint)length || (uint)start > (uint)end)
+                throw new ArgumentOutOfRangeException();
+
+            return new OffsetAndLength(start, end - start);
+        }
+
+        public readonly struct OffsetAndLength
+        {
+            public int Offset { get; }
+            public int Length { get; }
+
+            public OffsetAndLength(int offset, int length)
+            {
+                Offset = offset;
+                Length = length;
+            }
+
+            public void Deconstruct(out int offset, out int length)
+            {
+                offset = Offset;
+                length = Length;
+            }
+        }
+
     }
 }
 
